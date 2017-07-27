@@ -1,6 +1,6 @@
 {
   "picture_dir" : "errno_pics",
-  "serial_port" : "/dev/ttyACM0",
+  "serial_port" : "/dev/null",
   "baud_rate" : 9600,
   "start_cmd" : "TP",
   "good_reply" : "Picture was taken.",

@@ -13,7 +13,7 @@ from os import chdir
 
 
 # ===== Globals ===== #
-SCRIPT_DIR = "/home/pi/picture_daemon"
+SCRIPT_DIR = "/home/pi/ERRNO_Picture_Daemon"
 # ===== Globals ===== #
 
 
@@ -45,7 +45,7 @@ if __name__ == "__main__":
   config = load_json("{}/config.json".format(SCRIPT_DIR))
 
   # Change to the correct directory
-  chdir("/home/pi/picture_daemon/{}".format(config["picture_dir"]))
+  chdir("{}/{}".format(SCRIPT_DIR, config["picture_dir"]))
 
   # Configure the serial connection
   ser = serial.Serial(config["serial_port"], config["baud_rate"])
