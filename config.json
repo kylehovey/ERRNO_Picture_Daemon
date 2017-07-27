@@ -1,9 +1,9 @@
 {
   "picture_dir" : "errno_pics",
-  "serial_port" : "/dev/null",
+  "serial_port" : "/dev/ttyAMA0",
   "baud_rate" : 9600,
   "start_cmd" : "TP",
   "good_reply" : "Picture was taken.",
   "bad_reply" : "Picture was not taken.",
-  "wait_time_minutes" : "5"
+  "wait_time_minutes" : 5
 }

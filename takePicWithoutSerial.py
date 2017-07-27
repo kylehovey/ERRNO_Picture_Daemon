@@ -5,12 +5,10 @@
 
 
 # ===== Dependencies ===== #
-import serial, picamera, json
-from RPi import GPIO
+import json, picamera
 from time import time, sleep
 from os import chdir
 # ===== Dependencies ===== #
-
 
 # ===== Globals ===== #
 SCRIPT_DIR = "/home/pi/ERRNO_Picture_Daemon"
@@ -33,7 +31,7 @@ def save_json(save_file, contents):
   out.close()
 
 # Take a picture and store it in the current working directory
-def takePicture():
+def takePicture(camera):
   camera.capture(str(time()).replace(".", "") + '.jpg')
   return
 # ===== Function Definition ===== #
@@ -47,30 +45,17 @@ if __name__ == "__main__":
   # Change to the correct directory
   chdir("{}/{}".format(SCRIPT_DIR, config["picture_dir"]))
 
-  # Configure the serial connection
-  ser = serial.Serial(config["serial_port"], config["baud_rate"])
-  ser.baudrate = config["baud_rate"]
-
   # Get the camera connection
   camera = picamera.PiCamera()
-
-  # Set the GPIO mode
-  GPIO.setmode(GPIO.BOARD)
-
-  # Block the thread for a while until we get a line
-  read_ser = ser.readline()
 
   # Determine the wait time
   wait_ms = config["wait_time_minutes"] * 60;
 
-  # If the command recieved is the one to initiate the pictures, start capture
-  if(read_ser == config["start_cmd"]):
-    while True:
-      # Do the thing
-      takePicture()
+  # Take picture then wait for configured interval
+  while True:
+    # Do the thing
+    takePicture(camera)
 
-      # Send reply back confirming picture was taken
-
-      # Sleep for five minutes
-      sleep(wait_ms)
+    # Sleep for five minutes
+    sleep(wait_ms)
 # ===== Main Section ===== #
